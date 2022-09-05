@@ -123,7 +123,7 @@ export function getNthPermutation(n: number): number[] {
     startAt += factorial(size);
     size++;
   }
-  return getNthOfMthPermutation(n - startAt, size);
+  return getNthOfMthPermutationFast(n - startAt, size);
 }
 
 // getNthPermutation: (number, number) => number[]
@@ -137,6 +137,24 @@ export function getNthOfMthPermutation(nth: number, size: number): number[] {
     mutateNextPermutation(map);
   }
   return map;
+}
+
+// getNthPermutation: (number, number) => number[]
+// Returns the nth permutation of the integers 0..n-1
+export function getNthOfMthPermutationFast(n: number, size: number): number[] {
+  let map = new Array(size);
+  for (let i = 0; i < size; i++) {
+    map[i] = i;
+  }
+
+  const result = [];
+  for (let i = size; i > 0; i--) {
+    const r = n % i;
+    n = Math.floor(n / i);
+    result.push(map[r]);
+    map = map.slice(0, r).concat(map.slice(r + 1));
+  }
+  return result;
 }
 
 export function nextPermutation(map: number[]): number[] {

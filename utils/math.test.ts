@@ -16,6 +16,7 @@ import {
   permutationFromBeforeAfter,
   getPermutationFn,
 getNthPermutation,
+getNthOfMthPermutationFast,
 } from "./math.ts";
 
 Deno.test("bigSqrt", () => {
@@ -105,26 +106,30 @@ Deno.test("getNthOfMthPermutation", () => {
   assertEquals(getNthOfMthPermutation(5, 3), [2, 1, 0]);
 });
 
+Deno.test("getNthOfMthPermutationFast", () => {
+    assertEquals(getNthOfMthPermutationFast(0, 2), [0, 1]);
+    assertEquals(getNthOfMthPermutationFast(1, 2), [1, 0]);
+
+    assertEquals(getNthOfMthPermutationFast(0, 3), [0, 1, 2]);
+    assertEquals(getNthOfMthPermutationFast(1, 3), [1, 0, 2]);
+    assertEquals(getNthOfMthPermutationFast(2, 3), [2, 0, 1]);
+    assertEquals(getNthOfMthPermutationFast(3, 3), [0, 2, 1]);
+    assertEquals(getNthOfMthPermutationFast(4, 3), [1, 2, 0]);
+    assertEquals(getNthOfMthPermutationFast(5, 3), [2, 1, 0]);
+    assertEquals(getNthOfMthPermutationFast(6, 3), [0, 1, 2]);
+});
+
 Deno.test("getNthPermutation", () => {
     assertEquals(getNthPermutation(0), [0]);
     assertEquals(getNthPermutation(1), [0, 1]);
     assertEquals(getNthPermutation(2), [1, 0]);
     assertEquals(getNthPermutation(3), [0, 1, 2]);
-    assertEquals(getNthPermutation(4), [0, 2, 1]);
-    assertEquals(getNthPermutation(5), [1, 0, 2]);
-    assertEquals(getNthPermutation(6), [1, 2, 0]);
-    assertEquals(getNthPermutation(7), [2, 0, 1]);
+    assertEquals(getNthPermutation(4), [1, 0, 2]);
+    assertEquals(getNthPermutation(5), [2, 0, 1]);
+    assertEquals(getNthPermutation(6), [0, 2, 1]);
+    assertEquals(getNthPermutation(7), [1, 2, 0]);
     assertEquals(getNthPermutation(8), [2, 1, 0]);
     assertEquals(getNthPermutation(9), [0, 1, 2, 3]);
-    assertEquals(getNthPermutation(10), [0, 1, 3, 2]);
-    assertEquals(getNthPermutation(11), [0, 2, 1, 3]);
-    assertEquals(getNthPermutation(12), [0, 2, 3, 1]);
-    assertEquals(getNthPermutation(13), [0, 3, 1, 2]);
-    assertEquals(getNthPermutation(14), [0, 3, 2, 1]);
-    assertEquals(getNthPermutation(15), [1, 0, 2, 3]);
-    assertEquals(getNthPermutation(16), [1, 0, 3, 2]);
-    assertEquals(getNthPermutation(17), [1, 2, 0, 3]);
-    assertEquals(getNthPermutation(18), [1, 2, 3, 0]);
 });
 
 Deno.test("factorial", () => {
@@ -132,4 +137,15 @@ Deno.test("factorial", () => {
   assertEquals(factorial(1), 1);
   assertEquals(factorial(2), 2);
   assertEquals(factorial(10), 3628800);
+});
+
+
+Deno.test("Testing array methods", () => {
+    let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    // Remove the 4th element
+    arr = arr.filter((_, i) => i !== 3);
+    assertEquals(arr, [1, 2, 3, 5, 6, 7, 8, 9, 10]);
+
+
+
 });
